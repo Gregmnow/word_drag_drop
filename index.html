@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Security Word Drop</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="game-container">
+        <header>
+            <h1>Cyber Security Word Drop</h1>
+            <div id="stats">
+                <span id="level-display">Level: 1</span>
+                <span id="score">Score: 0</span>
+                <span id="lives">Lives: 3</span>
+            </div>
+        </header>
+
+        <div id="ui-overlay" class="overlay active">
+            <div id="start-screen">
+                <h2>Cyber Security Training</h2>
+                <p>Drag the correct word to complete the sentence.</p>
+                <div class="level-buttons">
+                    <button class="level-btn" data-level="1">Level 1 (Basic)</button>
+                    <button class="level-btn" data-level="2">Level 2 (Intermediate)</button>
+                    <button class="level-btn" data-level="3">Level 3 (Advanced)</button>
+                </div>
+            </div>
+            <div id="game-over-screen" class="hidden">
+                <h2 id="game-over-title">Game Over</h2>
+                <p id="final-score">Score: 0</p>
+                <div class="level-buttons">
+                    <button id="restart-btn">Play Again</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="game-content">
+            <div id="paragraph-container">
+                <!-- Text with Drop Zones will go here -->
+                <p id="challenge-text">Select a level to start...</p>
+            </div>
+
+            <div id="word-bank">
+                <!-- Draggable Word Cards will go here -->
+            </div>
+        </div>
+
+        <!-- Dictionary Modal -->
+        <div id="dictionary-overlay" class="overlay hidden">
+            <div id="dictionary-modal">
+                <button id="close-dict-btn">&times;</button>
+                <h2 id="dict-word">Word</h2>
+                <p id="dict-phonetic">/wɜrd/</p>
+                <div id="dict-audio-container"></div>
+                <div id="dict-definitions">
+                    <!-- Definitions will be injected here -->
+                    <p>Loading definition...</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Game Data & Logic -->
+    <!-- levels.js contains the paragraphs and word options. EDIT THIS FILE to change content! -->
+    <script src="levels.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

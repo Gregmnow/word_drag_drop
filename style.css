@@ -1,0 +1,320 @@
+/* Global Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: #fff;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#game-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* UI Overlay & Menus */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: none;
+    /* hidden by default, toggled via .active */
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.overlay.active {
+    display: flex;
+}
+
+/* Dictionary Modal Overlay */
+#dictionary-overlay {
+    z-index: 200;
+    /* Above everything */
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+}
+
+#start-screen,
+#game-over-screen,
+#dictionary-modal {
+    text-align: center;
+    padding: 40px;
+    background: rgba(30, 30, 50, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+    max-width: 600px;
+    width: 90%;
+}
+
+.level-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.level-btn,
+#restart-btn {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    color: white;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.level-btn:hover,
+#restart-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(118, 75, 162, 0.4);
+}
+
+#game-over-screen h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+#game-over-screen p {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+}
+
+/* Header */
+header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 10;
+}
+
+h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+#stats {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+#stats span {
+    margin-left: 20px;
+}
+
+/* Game Content */
+#game-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Paragraph Container */
+#paragraph-container {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 40px;
+    width: 100%;
+    max-width: 900px;
+    font-size: 1.8rem;
+    line-height: 1.8;
+    text-align: left;
+    /* Better for paragraphs */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    overflow-y: auto;
+    max-height: 50vh;
+}
+
+/* Drop Zone */
+.drop-zone {
+    display: inline-block;
+    min-width: 120px;
+    height: 40px;
+    border-bottom: 3px dashed rgba(255, 255, 255, 0.5);
+    margin: 0 5px;
+    vertical-align: baseline;
+    transition: all 0.3s ease;
+    text-align: center;
+    color: #ffd700;
+    font-weight: bold;
+}
+
+.drop-zone.drag-over {
+    background: rgba(255, 255, 255, 0.2);
+    border-bottom-color: #fff;
+    transform: scale(1.05);
+}
+
+.drop-zone.correct {
+    border-bottom: 3px solid #2ecc71;
+    color: #2ecc71;
+}
+
+.drop-zone.wrong {
+    animation: shake 0.4s ease;
+    border-bottom-color: #e74c3c;
+}
+
+/* Interactive Words */
+.interactive-word {
+    cursor: pointer;
+    transition: color 0.2s, background 0.2s;
+    border-radius: 4px;
+    padding: 0 2px;
+}
+
+.interactive-word:hover {
+    color: #667eea;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Word Bank */
+#word-bank {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    width: 100%;
+    max-width: 900px;
+    min-height: 100px;
+}
+
+/* Word Card */
+.word-card {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 10px 25px;
+    border-radius: 25px;
+    cursor: grab;
+    font-size: 1.2rem;
+    transition: all 0.2s ease;
+    user-select: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.word-card:active {
+    cursor: grabbing;
+    transform: scale(0.95);
+}
+
+.word-card:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+.word-card.dragging {
+    opacity: 0.5;
+}
+
+/* Dictionary Modal specific */
+#dictionary-modal h2 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    color: #667eea;
+}
+
+#dict-phonetic {
+    font-style: italic;
+    color: #aaa;
+    margin-bottom: 20px;
+}
+
+#dict-audio-container {
+    margin-bottom: 15px;
+}
+
+.audio-play-btn {
+    background: #667eea;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.audio-play-btn:hover {
+    background: #764ba2;
+}
+
+#dict-definitions {
+    text-align: left;
+    margin-top: 20px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+#dict-definitions p {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#close-dict-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #fff;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Animations */
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    75% {
+        transform: translateX(5px);
+    }
+}
