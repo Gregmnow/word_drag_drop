@@ -7,8 +7,8 @@
 
 body {
     font-family: 'Outfit', sans-serif;
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-    color: #fff;
+    background: linear-gradient(135deg, #E8E8FF 0%, #F4F4FF 100%);
+    color: #1E1B4B;
     height: 100vh;
     overflow: hidden;
     display: flex;
@@ -33,9 +33,9 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(232, 232, 255, 0.7);
+    backdrop-filter: blur(12px);
     display: none;
-    /* hidden by default, toggled via .active */
     justify-content: center;
     align-items: center;
     z-index: 100;
@@ -48,23 +48,53 @@ body {
 /* Dictionary Modal Overlay */
 #dictionary-overlay {
     z-index: 200;
-    /* Above everything */
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(5px);
+    background: rgba(47, 28, 106, 0.15);
+    backdrop-filter: blur(8px);
 }
 
 #start-screen,
 #game-over-screen,
 #dictionary-modal {
+    position: relative;
     text-align: center;
     padding: 40px;
-    background: rgba(30, 30, 50, 0.95);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 16px;
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+    background: #ffffff;
+    border: 1px solid rgba(139, 92, 246, 0.15);
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(47, 28, 106, 0.08);
     max-width: 600px;
     width: 90%;
+    color: #1E1B4B;
+}
+
+#start-screen h2,
+#game-over-screen h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+#start-screen .subtitle {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #3D30A2;
+    margin-top: -4px;
+    margin-bottom: 20px;
+}
+
+#start-screen p,
+#game-over-screen p {
+    font-size: 1.1rem;
+    color: #55527D;
+    margin-bottom: 24px;
+}
+
+#start-screen .instruction-subtext {
+    font-size: 0.95rem;
+    color: #8B5CF6;
+    margin-top: -16px;
+    margin-bottom: 24px;
+    font-weight: 500;
 }
 
 .level-buttons {
@@ -77,30 +107,22 @@ body {
 
 .level-btn,
 #restart-btn {
-    padding: 15px 30px;
-    font-size: 1.2rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 14px 28px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, #E3269D 0%, #8E2DE2 100%);
     border: none;
     color: white;
     border-radius: 50px;
     cursor: pointer;
+    box-shadow: 0 6px 15px rgba(227, 38, 157, 0.2);
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .level-btn:hover,
 #restart-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(118, 75, 162, 0.4);
-}
-
-#game-over-screen h2 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-}
-
-#game-over-screen p {
-    font-size: 1.5rem;
-    margin-bottom: 30px;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(142, 45, 226, 0.35);
 }
 
 /* Header */
@@ -109,25 +131,165 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(139, 92, 246, 0.15);
     z-index: 10;
+}
+
+.header-title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 h1 {
     font-size: 1.5rem;
     font-weight: 700;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    color: #1E1B4B;
+    line-height: 1.1;
+}
+
+header .subtitle {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #55527D;
+    margin-top: 2px;
+}
+
+#header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Accessibility Switch */
+#accessibility-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #55527D;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #D1D5DB;
+    transition: .3s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .3s;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.switch input:checked + .slider {
+    background: linear-gradient(135deg, #E3269D 0%, #8E2DE2 100%);
+}
+
+.switch input:checked + .slider:before {
+    transform: translateX(20px);
 }
 
 #stats {
-    font-size: 1.2rem;
-    font-weight: 500;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #3D30A2;
+    display: flex;
+    align-items: center;
 }
 
 #stats span {
     margin-left: 20px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.strike-container {
+    display: inline-flex;
+    gap: 6px;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.strike-box {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #D1D5DB;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.75rem;
+    color: transparent;
+    background: #ffffff;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.strike-box.active {
+    border-color: #EF4444;
+    color: #EF4444;
+    background: #FEE2E2;
+}
+
+#start-over-btn {
+    padding: 8px 18px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    background: #ffffff;
+    border: 1.5px solid #EC4899;
+    color: #EC4899;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#start-over-btn:hover {
+    background: linear-gradient(135deg, #E3269D 0%, #8E2DE2 100%);
+    border-color: transparent;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(227, 38, 157, 0.25);
+    transform: translateY(-1px);
+}
+
+/* Gradient Text Effect */
+.gradient-text {
+    background: linear-gradient(135deg, #E3269D 0%, #8E2DE2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
 }
 
 /* Game Content */
@@ -136,23 +298,24 @@ h1 {
     display: flex;
     flex-direction: column;
     padding: 20px;
-    gap: 20px;
+    gap: 24px;
     justify-content: center;
     align-items: center;
 }
 
 /* Paragraph Container */
 #paragraph-container {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
+    background: #ffffff;
+    border: 1px solid rgba(139, 92, 246, 0.15);
+    border-radius: 16px;
     padding: 40px;
     width: 100%;
     max-width: 900px;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
+    font-weight: 500;
     line-height: 1.8;
     text-align: left;
-    /* Better for paragraphs */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 30px rgba(47, 28, 106, 0.04);
     overflow-y: auto;
     max-height: 50vh;
 }
@@ -161,30 +324,30 @@ h1 {
 .drop-zone {
     display: inline-block;
     min-width: 120px;
-    height: 40px;
-    border-bottom: 3px dashed rgba(255, 255, 255, 0.5);
-    margin: 0 5px;
+    height: 38px;
+    border-bottom: 2px dashed #7C3AED;
+    margin: 0 6px;
     vertical-align: baseline;
     transition: all 0.3s ease;
     text-align: center;
-    color: #ffd700;
-    font-weight: bold;
+    color: #8E2DE2;
+    font-weight: 600;
 }
 
 .drop-zone.drag-over {
-    background: rgba(255, 255, 255, 0.2);
-    border-bottom-color: #fff;
-    transform: scale(1.05);
+    background: rgba(124, 58, 237, 0.08);
+    border-bottom-color: #8E2DE2;
+    transform: scale(1.03);
 }
 
 .drop-zone.correct {
-    border-bottom: 3px solid #2ecc71;
-    color: #2ecc71;
+    border-bottom: 2px solid #10B981;
+    color: #10B981;
 }
 
 .drop-zone.wrong {
     animation: shake 0.4s ease;
-    border-bottom-color: #e74c3c;
+    border-bottom-color: #EF4444;
 }
 
 /* Interactive Words */
@@ -196,8 +359,8 @@ h1 {
 }
 
 .interactive-word:hover {
-    color: #667eea;
-    background: rgba(255, 255, 255, 0.1);
+    color: #8E2DE2;
+    background: rgba(139, 92, 246, 0.08);
 }
 
 /* Word Bank */
@@ -207,8 +370,9 @@ h1 {
     flex-wrap: wrap;
     justify-content: center;
     padding: 20px;
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(139, 92, 246, 0.1);
+    border-radius: 16px;
     width: 100%;
     max-width: 900px;
     min-height: 100px;
@@ -216,25 +380,36 @@ h1 {
 
 /* Word Card */
 .word-card {
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 10px 25px;
+    background: #ffffff;
+    border: 1.5px solid #E0E7FF;
+    color: #1E1B4B;
+    font-weight: 500;
+    padding: 10px 24px;
     border-radius: 25px;
     cursor: grab;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     transition: all 0.2s ease;
     user-select: none;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 6px rgba(47, 28, 106, 0.03);
 }
 
 .word-card:active {
     cursor: grabbing;
-    transform: scale(0.95);
+    transform: scale(0.96);
 }
 
 .word-card:hover {
-    background: rgba(255, 255, 255, 0.25);
+    background: #F8FAFC;
+    border-color: #8B5CF6;
+    color: #8E2DE2;
     transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(139, 92, 246, 0.1);
+}
+
+.word-card:focus {
+    outline: none;
+    border-color: #8B5CF6;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.45);
 }
 
 .word-card.dragging {
@@ -243,59 +418,76 @@ h1 {
 
 /* Dictionary Modal specific */
 #dictionary-modal h2 {
-    font-size: 3rem;
-    margin-bottom: 10px;
-    color: #667eea;
+    font-size: 2.8rem;
+    margin-bottom: 8px;
+    color: #8B5CF6;
 }
 
 #dict-phonetic {
-    font-style: italic;
-    color: #aaa;
+    font-size: 1.3rem;
+    font-style: normal;
+    color: #8B5CF6;
+    font-weight: 600;
     margin-bottom: 20px;
 }
 
 #dict-audio-container {
-    margin-bottom: 15px;
+    margin-bottom: 18px;
 }
 
 .audio-play-btn {
-    background: #667eea;
+    background: linear-gradient(135deg, #E3269D 0%, #8E2DE2 100%);
     border: none;
-    padding: 8px 16px;
-    border-radius: 20px;
+    color: white;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 25px;
     cursor: pointer;
     font-size: 1rem;
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    box-shadow: 0 4px 10px rgba(227, 38, 157, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .audio-play-btn:hover {
-    background: #764ba2;
+    transform: scale(1.03);
+    box-shadow: 0 6px 15px rgba(142, 45, 226, 0.25);
 }
 
 #dict-definitions {
     text-align: left;
     margin-top: 20px;
-    max-height: 300px;
+    max-height: 250px;
     overflow-y: auto;
 }
 
+#dict-definitions h3 {
+    font-size: 1.1rem;
+    color: #3D30A2;
+    margin-top: 12px;
+    margin-bottom: 6px;
+}
+
 #dict-definitions p {
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    color: #55527D;
+    font-size: 1rem;
+    border-bottom: 1px solid rgba(139, 92, 246, 0.1);
 }
 
 #close-dict-btn {
     position: absolute;
     top: 15px;
-    right: 15px;
+    right: 20px;
     background: none;
     border: none;
-    font-size: 2rem;
-    color: #fff;
+    font-size: 2.2rem;
+    color: #1E1B4B;
     cursor: pointer;
+    line-height: 1;
 }
 
 .hidden {
@@ -304,16 +496,12 @@ h1 {
 
 /* Animations */
 @keyframes shake {
-
-    0%,
-    100% {
+    0%, 100% {
         transform: translateX(0);
     }
-
     25% {
         transform: translateX(-5px);
     }
-
     75% {
         transform: translateX(5px);
     }

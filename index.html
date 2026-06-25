@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyber Security Word Drop</title>
+    <title>Word Drop: Cybersecurity Subject</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
 </head>
@@ -12,18 +12,37 @@
 <body>
     <div id="game-container">
         <header>
-            <h1>Cyber Security Word Drop</h1>
-            <div id="stats">
-                <span id="level-display">Level: 1</span>
-                <span id="score">Score: 0</span>
-                <span id="lives">Lives: 3</span>
+            <div class="header-title-container">
+                <h1>Word <span class="gradient-text">Drop</span></h1>
+                <span class="subtitle">Cybersecurity Subject</span>
+            </div>
+            <div id="header-right">
+                <div id="accessibility-control">
+                    <label class="switch">
+                        <input type="checkbox" id="accessibility-toggle">
+                        <span class="slider"></span>
+                    </label>
+                    <span class="toggle-label">Read Aloud & Click Mode</span>
+                </div>
+                <div id="stats">
+                    <span id="level-display">Level: 1</span>
+                    <span id="score">Score: 0</span>
+                    <span id="lives" class="strike-container">
+                        <span class="strike-box"></span>
+                        <span class="strike-box"></span>
+                        <span class="strike-box"></span>
+                    </span>
+                </div>
+                <button id="start-over-btn" class="hidden">Start Over</button>
             </div>
         </header>
 
         <div id="ui-overlay" class="overlay active">
             <div id="start-screen">
-                <h2>Cyber Security Training</h2>
-                <p>Drag the correct word to complete the sentence.</p>
+                <h2>Word <span class="gradient-text">Drop</span></h2>
+                <div class="subtitle">Cybersecurity Subject</div>
+                <p>Click or drag and drop the word you think is the correct word for the sentence.</p>
+                <p class="instruction-subtext">To see the definition and pronunciation, right-click on a word.</p>
                 <div class="level-buttons">
                     <button class="level-btn" data-level="1">Level 1 (Basic)</button>
                     <button class="level-btn" data-level="2">Level 2 (Intermediate)</button>
